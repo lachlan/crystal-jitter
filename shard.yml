@@ -1,0 +1,13 @@
+name: crystal-jitter
+version: 0.1.0
+
+authors:
+  - Lachlan Dowding <lachlan@permafrost.space>
+
+targets:
+  jitter:
+    main: src/jitter.cr
+
+crystal: '>= 1.12.2'
+
+license: MIT

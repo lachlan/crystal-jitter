@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "jitter.exe", 0, True
