@@ -14,12 +14,12 @@ module Jitter
     loop do
       begin
         mouse.reposition_if_inert
-
+      rescue ex
+        Log.error(exception: ex) { "ERROR during jitter logic" }
+      ensure
         duration = Math.min(Random.rand(SLEEP_DURATION) + 1.0, SLEEP_DURATION).seconds
         Log.info { "Sleeping:   #{duration}" }
         sleep(duration)
-      rescue ex
-        Log.error(exception: ex) { "ERROR during jitter logic" }
       end
     end
   ensure
