@@ -4,9 +4,9 @@ Repositions the mouse while the mouse is inert to avoid screen
 locking on Windows.
 
 At random intervals between 1 and 30 seconds, the mouse will be 
-repositioned by 1 pixel randomly up or down or or left or right
-or diagonally from its current position and then repositioned back 
-to its original position immediately.
+repositioned by 1 to 10 pixels randomly up/down and left/right from 
+its current position and then repositioned back to its original 
+position immediately.
 
 The mouse will only be repositioned if its position has not changed 
 since the last time we checked its position. This vastly reduces the 
