@@ -1,3 +1,3 @@
 require "./jitter/jitter"
 
-Jitter.run
+Jitter::Supervisor.new.run

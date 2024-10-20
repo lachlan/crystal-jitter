@@ -21,7 +21,7 @@ To build from source:
 - Install crystal: refer to https://github.com/neatorobito/scoop-crystal
 - Clone repo: `git clone https://github.com/lachlan/crystal-jitter`
 - Install dependencies: `shards install`
-- Build: `shards build --static --release`
+- Build: `shards build --release --static --link-flags="/SUBSYSTEM:WINDOWS"`
 
 Or download pre-built binary `jitter.exe` from [releases](https://github.com/lachlan/crystal-jitter/releases).
 Put the pre-built binary in whatever directory you like, and rename it 
@@ -30,7 +30,7 @@ to run at startup / login using the Windows task scheduler.
 
 ## Usage
 
-Run `jitter.exe` and it will run forever; use `CTRL-C` to stop it.
+Run `jitter.exe` and it will run forever; use Task Manager to kill its process when done.
 
 ```
 C:\Some\Directory\jitter.exe
@@ -45,7 +45,6 @@ C:\Some\Directory\jitter.exe
 2024-07-07T01:26:23.797710Z   INFO - JITTER: Sleeping:   00:00:14.587796993
 2024-07-07T01:26:38.398313Z   INFO - JITTER: Status:     position = (x = 887, y = 728), screen = 1470x919
 2024-07-07T01:26:38.398316Z   INFO - JITTER: Sleeping:   00:00:25.906205343
-^C
 ```
 
 ## Contributing
