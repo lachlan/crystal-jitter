@@ -19,7 +19,7 @@ To build from source:
 
 - Install scoop: refer to https://scoop.sh/
 - Install crystal: refer to https://github.com/neatorobito/scoop-crystal
-- Clone repo: `git clone https://github.com/lachlan/crystal-jitter`
+- Clone repo: `git clone https://github.com/lachlan/crystal-jitter.git`
 - Install dependencies: `shards install`
 - Build: `shards build --release --static --link-flags="/SUBSYSTEM:WINDOWS"`
 
@@ -34,6 +34,8 @@ Run `jitter.exe` and it will run forever; use Task Manager to kill its process w
 
 ```
 C:\Some\Directory\jitter.exe
+...
+C:\Some\Directory\type jitter.log
 2024-07-07T01:25:53.125260Z   INFO - JITTER: Started
 2024-07-07T01:25:53.128625Z   INFO - JITTER: Status:     position = (x = 508, y = 645), screen = 1470x919
 2024-07-07T01:25:53.128627Z   INFO - JITTER: Sleeping:   00:00:26.147264439
@@ -45,6 +47,7 @@ C:\Some\Directory\jitter.exe
 2024-07-07T01:26:23.797710Z   INFO - JITTER: Sleeping:   00:00:14.587796993
 2024-07-07T01:26:38.398313Z   INFO - JITTER: Status:     position = (x = 887, y = 728), screen = 1470x919
 2024-07-07T01:26:38.398316Z   INFO - JITTER: Sleeping:   00:00:25.906205343
+...
 ```
 
 ## Contributing
