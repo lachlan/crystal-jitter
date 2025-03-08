@@ -33,9 +33,9 @@ to run at startup / login using the Windows task scheduler.
 Run `jitter.exe` and it will run forever; use Task Manager to kill its process when done.
 
 ```
-C:\Some\Directory\jitter.exe
+C:\Some\Directory\>jitter.exe
 ...
-C:\Some\Directory\type jitter.log
+C:\Some\Directory\>type jitter.log
 2024-07-07T01:25:53.125260Z   INFO - JITTER: Started
 2024-07-07T01:25:53.128625Z   INFO - JITTER: Status:     position = (x = 508, y = 645), screen = 1470x919
 2024-07-07T01:25:53.128627Z   INFO - JITTER: Sleeping:   00:00:26.147264439
