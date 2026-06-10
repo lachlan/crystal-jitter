@@ -2,18 +2,24 @@ require "log"
 
 module Jitter
   class Mouse
-    MOUSE_POINTER_INCREMENT_X = 10 # How many pixels to reposition the mouse cursor by on the x-axis
-    MOUSE_POINTER_INCREMENT_Y = 10 # How many pixels to reposition the mouse cursor by on the y-axis
+    # How many pixels to reposition the mouse cursor by on the x and y axes
+    REPOSITION_RANGE = 1..10
+
+    @previous_position : LibUser32::Point
+    @current_position : LibUser32::Point
+    @screen_width : Range(LibC::LONG, LibC::LONG)
+    @screen_height : Range(LibC::LONG, LibC::LONG)
+    @random = Random.new
 
     # Creates a new Mouse object for repositioning the mouse slightly if it hasn't moved
     def initialize
       @previous_position = @current_position = LibUser32::Point.new(x: 0, y: 0)
       @screen_width = @screen_height = 0..1
-      @random = Random.new
     end
 
-    # Will move the mouse by 1 pixel diagonally and back to its original position
-    # if the mouse has not moved since the last reposition
+    # Will move the mouse by 1..10 pixels on both the x-axis and y-axis then
+    # back to its original position if the mouse has not moved since the last
+    # reposition
     def reposition_if_inert
       # refresh screen dimensions and current mouse position
       refresh_all
@@ -105,25 +111,25 @@ module Jitter
     private def calculate_delta : LibUser32::Point
       delta = LibUser32::Point.new
       if (current_position = @current_position) && (screen_width = @screen_width) && (screen_height = @screen_height) && (random = @random)
-        x_increment = random.rand(MOUSE_POINTER_INCREMENT_X) + 1
-        y_increment = random.rand(MOUSE_POINTER_INCREMENT_Y) + 1
+        delta.x = calculate_delta_for_axis(current_position.x, screen_width.begin, screen_width.end)
+        delta.y = calculate_delta_for_axis(current_position.y, screen_height.begin, screen_height.end)
+      end
+      delta
+    end
 
-        # calculate the x-axis delta so that it is random unless it is at the extremities of the screen width
-        if current_position.x == screen_width.begin
-          delta.x = x_increment
-        elsif current_position.x == screen_width.end
-          delta.x = x_increment * -1
+    # Returns a new random delta for a single axis on the screen taking into account the given screen limits
+    private def calculate_delta_for_axis(current_position : LibC::LONG, begin_limit : LibC::LONG, end_limit : LibC::LONG) : LibC::LONG
+      delta : LibC::Long = 0
+      if (random = @random)
+        # calculate the axis delta so that it is random even when at the
+        # screen limits
+        increment = random.rand(REPOSITION_RANGE)
+        if current_position == begin_limit
+          delta = increment
+        elsif current_position == end_limit
+          delta = increment * -1
         else
-          delta.x = random.next_bool ? x_increment * -1 : x_increment
-        end
-
-        # calculate the y-axis delta so that it is random unless it is at the extremities of the screen height
-        if current_position.y == screen_height.begin
-          delta.y = y_increment
-        elsif current_position.y == screen_height.end
-          delta.y = y_increment * -1
-        else
-          delta.y = random.next_bool ? y_increment * -1 : y_increment
+          delta = random.next_bool ? increment * -1 : increment
         end
       end
       delta

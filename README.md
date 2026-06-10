@@ -1,39 +1,41 @@
 # crystal-jitter
 
-Repositions the mouse while the mouse is inert to avoid screen 
-locking on Windows.
+Repositions the mouse while the mouse is inert to avoid screen locking on
+Windows.
 
-At random intervals between 1 and 30 seconds, the mouse will be 
-repositioned by 1 to 10 pixels randomly up/down and left/right from 
-its current position and then repositioned back to its original 
-position immediately.
+At random intervals between 30 and 60 seconds, the mouse will be repositioned
+between 1 to 10 pixels randomly on both the x-axis and y-axis from its current
+position, and then immediately repositioned back to its original position.
 
-The mouse will only be repositioned if its position has not changed 
-since the last time we checked its position. This vastly reduces the 
-effect of the mouse being repositioned during active use, such that 
-running the program is effectively invisible to the user.
+The mouse will only be repositioned if its position has not changed since the
+last time we checked its position. This vastly reduces the effect of the mouse
+being repositioned during active use, such that running the program is 
+effectively invisible to the user.
 
 ## Installation
 
 To build from source:
 
-- Install scoop: refer to https://scoop.sh/
-- Install crystal: refer to https://github.com/neatorobito/scoop-crystal
-- Clone repo: `git clone https://github.com/lachlan/crystal-jitter`
-- Install dependencies: `shards install`
+- Install scoop: refer to <https://scoop.sh/>
+- Install crystal: `scoop install crystal`
+- Clone repo: `git clone https://github.com/lachlan/crystal-jitter.git`
+- Change directory: `cd crystal-jitter`
 - Build: `shards build --release --static --link-flags="/SUBSYSTEM:WINDOWS"`
 
 Or download pre-built binary `jitter.exe` from [releases](https://github.com/lachlan/crystal-jitter/releases).
-Put the pre-built binary in whatever directory you like, and rename it 
-to whatever filename.exe you like. Then run it manually or schedule it
-to run at startup / login using the Windows task scheduler.
+Put the pre-built binary in whatever directory you like, and rename it to
+whatever `filename.exe` you like. Then run it manually or schedule it to run
+at startup / login using the Windows task scheduler.
 
 ## Usage
 
-Run `jitter.exe` and it will run forever; use Task Manager to kill its process when done.
+Run `jitter.exe` and it will run forever in the background; use Task Manager 
+to kill its process when done.
 
 ```
-C:\Some\Directory\jitter.exe
+C:\Some\Directory\>jitter.exe
+...
+C:\Some\Directory\>type jitter.log
 2024-07-07T01:25:53.125260Z   INFO - JITTER: Started
 2024-07-07T01:25:53.128625Z   INFO - JITTER: Status:     position = (x = 508, y = 645), screen = 1470x919
 2024-07-07T01:25:53.128627Z   INFO - JITTER: Sleeping:   00:00:26.147264439
@@ -45,6 +47,7 @@ C:\Some\Directory\jitter.exe
 2024-07-07T01:26:23.797710Z   INFO - JITTER: Sleeping:   00:00:14.587796993
 2024-07-07T01:26:38.398313Z   INFO - JITTER: Status:     position = (x = 887, y = 728), screen = 1470x919
 2024-07-07T01:26:38.398316Z   INFO - JITTER: Sleeping:   00:00:25.906205343
+...
 ```
 
 ## Contributing

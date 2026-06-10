@@ -8,7 +8,7 @@ module Jitter
 
   # Runs the mouse jitter process
   class Supervisor
-    SLEEP_DURATION = 30.0
+    SLEEP_DURATION_RANGE = 30.0...60.0
 
     # Creates a new supervisor
     def initialize
@@ -28,7 +28,7 @@ module Jitter
         rescue ex
           Log.error(exception: ex) { "ERROR during jitter logic" }
         ensure
-          duration = Math.min(Random.rand(SLEEP_DURATION) + 1.0, SLEEP_DURATION).seconds
+          duration = Random.rand(SLEEP_DURATION_RANGE).seconds
           Log.info { "Sleeping:   #{duration}" }
           sleep(duration)
         end

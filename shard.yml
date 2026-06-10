@@ -1,5 +1,5 @@
 name: crystal-jitter
-version: 0.1.1
+version: 0.1.2
 
 authors:
   - Lachlan Dowding <lachlan@permafrost.space>
@@ -11,7 +11,7 @@ targets:
 dependencies:
   simplog:
     github: lachlan/crystal-simplog
-    version: "~> 0.1.4"
+    version: "~> 0.1.7"
 
 crystal: '>= 1.14.0'
 
