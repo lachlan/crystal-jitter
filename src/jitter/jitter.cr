@@ -13,7 +13,7 @@ module Jitter
     # Creates a new supervisor
     def initialize
       backend = SimpLog::FileBackend.new
-      backend.retention = 1.day
+      backend.delete_after = 1.day
       ::Log.setup_from_env(backend: backend)
     end
 
